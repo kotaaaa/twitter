@@ -8,7 +8,7 @@ import re
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
 
-'''データベースの設定ファイルを読み込むxxx'''
+'''データベースの設定ファイルを読み込む'''
 def get_db_name():
     local_db = {}
     with open('table_tweet.conf','r') as f:
