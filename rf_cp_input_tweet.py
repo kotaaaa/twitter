@@ -6,7 +6,6 @@ import cgi
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 print("Content-Type: text/html\n\n")
 
-# print(sys.version)
 import mysql.connector
 import MeCab
 import pandas as pd
@@ -51,7 +50,6 @@ def get_text(db_info, table_name):
         user = db_info["user"],
         passwd = db_info["passwd"],
         db = db_info["db_name"],
-        # charset = "utf8mb4"
         )
     cursor = connector.cursor()
     sql = """
@@ -112,7 +110,6 @@ def get_all_tweet():
             tweet = format_text(tweet)#ツイートの前処理を実行
             tweet = parse_text(tweet)#形態素解析する
             Processed_tweet.append(tweet)
-        # print(table_names[i],' s tweet',len(Processed_tweet))
         All_processed_tweet = np.append(All_processed_tweet,np.array(Processed_tweet))
 
     return All_processed_tweet
@@ -134,17 +131,13 @@ def make_tweet_bag(c_vec,tweet):
 '''教師ラベルを作成する'''
 def set_target(df):
     df['Target']=1
-    # df['Target'][0:14997]=0
-    # df['Target'][14997:20147]=1#Happyクラス:1
     df['Target'][0:5150]=1#Happyクラス:1
-    # df['Target'][20147:]=2#Sadクラス:2
     df['Target'][5150:]=2#Sadクラス:2
     return df
 
 '''ランダムフォレストモデルを訓練する'''
 def rf_train(df):
     clf = RandomForestClassifier(n_estimators=100, random_state=0)
-    # clf.fit(df.ix[14997:,:-1], df['Target'][14997:])
     clf.fit(df.ix[:,:-1], df['Target'][:])
     return clf
 
@@ -172,11 +165,9 @@ def sort_fi(clf,df):
 
 '''コマンドからテキストを読み込む'''
 def input_tweet():
-    # in_text = input('Enter your texts:')
-    # print('入力されたテキスト>>>',in_text)
+
     form = cgi.FieldStorage()
     form_check = 0
-    # print("<br>"+form["Text"].value+"<br>")
     return form["Text"].value
 
 '''テキストに対して前処理と形態素解析を行う．'''
@@ -185,7 +176,6 @@ def trim_tweet():
     print("<b>Text: </b>", in_text)
     in_text = format_text(in_text)#ツイートの前処理を実行
     in_text = parse_text(in_text)#形態素解析する
-    # print('tweets after trim>>>',in_text)
     return in_text
 
 '''Positive,Negativeを出力する．'''
@@ -195,10 +185,12 @@ def print_cat(label):
     elif(label==2):
         print("<h1>Negative Text</h1>")
 
+'''学習器をpickle形式で保存しておく'''
 def clf_save(clf,save_name):
     with open(save_name,'wb') as f:
         pickle.dump(clf,f)
 
+'''学習器をpickle形式から読み込む'''
 def clf_load(load_name):
     with open(load_name,'rb') as f:
         clf = pickle.load(f)
@@ -207,28 +199,13 @@ def clf_load(load_name):
 
 def main():
 
-    # All_tweet = get_all_tweet()
-    # c_vec = get_CountVec(All_tweet)
-    # clf_save(c_vec, save_vec)
     c_vec = clf_load(load_vec)
-    # feature = make_tweet_bag(c_vec, All_tweet)
-    # feature_with_label = set_target(feature)
-    # clf = rf_train(feature_with_label)
-    # clf_save(clf, save_clf)
     clf = clf_load(load_clf)
-
     in_text = [trim_tweet()]
-
     feature = make_tweet_bag(c_vec, in_text)
     tweet_1_vector = np.array(feature)
     cat_1_text = rf_classify(clf,tweet_1_vector)
-    # print('Category>>>',cat_1_text)
-
-
     print_cat(cat_1_text)
-
-    # print("</body></br>Positive or Negative</html>")
-
 
 if __name__ == "__main__":
     main()
