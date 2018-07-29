@@ -2,13 +2,9 @@
 
 紹介動画はこちら↓↓
 
-(前半)
+(前半)https://twitter.com/kotaaaa1110/status/1023439324631584768
 
-https://twitter.com/kotaaaa1110/status/1023439324631584768
-
-(後半)
-
-https://twitter.com/kotaaaa1110/status/1023439867450023940
+(後半)https://twitter.com/kotaaaa1110/status/1023439867450023940
 
 入力した文書に対してそのツイートがポジティブなのかネガティブのどちらの極性を持つのかを判定するシステムを作りました．
 
