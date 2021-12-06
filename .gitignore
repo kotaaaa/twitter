@@ -1,0 +1,7 @@
+predict/clf_rf.pickle
+predict/table_names_tweet.txt
+predict/table_names.txt
+predict/table_tweet.conf
+predict/table.conf
+predict/database.conf
+crawling/.python-version

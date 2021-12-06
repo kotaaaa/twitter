@@ -1,23 +1,23 @@
 # twitter
 
-入力した文書に対してそのツイートがポジティブなのかネガティブのどちらの極性を持つのかを判定するシステムを作りました．
+## Overview 
+- Collect tweet, analyse the distribution, statistics, build classfication model and predict category.
+Crawling: Collect tweets scripts
+ ├ crawl-tweets-withword.py: crawl tweets with specific query.
+ ├ crawl_followers.py: fetch user's followers
+ └ crawl_user_timeline.py: crawl users timeline's tweet.
+Model: train RF model, predict classification
+ ├ rf_input_tweet.py: Prints which class the input document belongs to.
+ ├ rf_get_tweets_label.py: Store the result of determining whether each tweet has pos or neg polarity 
+ |                         for the group of tweets in csv.
+ └ rf_show_FI.py: Prints the Feature Importance for each feature in the training model.
+View: Input html interface for demo
+ └ input.html: Html to show this as DEMO.
 
-使っているデータベース:mysql
-
-モデル:ランダムフォレスト
-
-訓練データ:ツイッターから集めてきたツイート約10000件
-
-正例:「嬉し」で集めてきた約5000件のツイート．
-
-負例:「悲し」で集めてきた約5000件のツイート．
-
-ここで訓練したモデルに対して，
-
-rf_input_tweet.py>>>入力した文書がどちらのクラスに所属するかを出力する．
-
-rf_get_tweets_label.py>>>csvでまとまったtweet群に対して，それぞれがpos,negどちらの極性を持つのか判定した結果を格納する．
-
-rf_show_FI.py>>>訓練モデルにおいて，各素性のFeature Importanceを出力する．
-
-というプログラムになっています．
+## Tech
+- FW: sklearn, pandas, numpy
+- DB: mysql
+- Model: Random Forest
+- Train data: About 1,000 tweets collected from Twitter API.
+  - Positive: About 5,000 tweets collected by "嬉し(Happy)". 
+  - Negative: About 5,000 tweets collected by "悲し(Sad)".  
