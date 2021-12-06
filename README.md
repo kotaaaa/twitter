@@ -1,7 +1,10 @@
 # Twitter text analysis
 
 ## Overview 
-- Collect tweet, analyse the distribution, statistics, build classfication model and predict category.
+- Collect tweet with twitter API, analyse the distribution, statistics, build classfication model and predict category (Posivtive / Negative).
+
+## Directory Configuration
+```
 Crawling: Collect tweets scripts
  ├ crawl-tweets-withword.py: crawl tweets with specific query.
  ├ crawl_followers.py: fetch user's followers
@@ -13,6 +16,7 @@ Model: train RF model, predict classification
  └ rf_show_FI.py: Prints the Feature Importance for each feature in the training model.
 View: Input html interface for demo
  └ input.html: Html to show this as DEMO.
+```
 
 ## Tech
 - FW: sklearn, pandas, numpy
