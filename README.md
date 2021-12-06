@@ -5,16 +5,16 @@
 
 ## Directory Configuration
 ```
-Crawling: Collect tweets scripts
+crawling: Collect tweets scripts
  ├ crawl-tweets-withword.py: crawl tweets with specific query.
  ├ crawl_followers.py: fetch user's followers
  └ crawl_user_timeline.py: crawl users timeline's tweet.
-Model: train RF model, predict classification
+model: train RF model, predict classification
  ├ rf_input_tweet.py: Prints which class the input document belongs to.
  ├ rf_get_tweets_label.py: Store the result of determining whether each tweet has pos or neg polarity 
  |                         for the group of tweets in csv.
  └ rf_show_FI.py: Prints the Feature Importance for each feature in the training model.
-View: Input html interface for demo
+view: Input html interface for demo
  └ input.html: Html to show this as DEMO.
 ```
 
