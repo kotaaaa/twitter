@@ -1,4 +1,4 @@
-# twitter
+# Twitter text analysis
 
 ## Overview 
 - Collect tweet, analyse the distribution, statistics, build classfication model and predict category.
